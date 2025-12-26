@@ -259,6 +259,43 @@ Push existing project:
 
 --------------------------------------------------------------------------------------------
 
+💡 .gitignore (IMPORTANT)
+
+- Used to prevent unwanted files from being tracked
+- Affects **only untracked files**
+
+Example `.gitignore`:
+
+    node_modules/
+    *.log
+    git.txt
+
+⚠️ NOTE:
+- If a file is already tracked, `.gitignore` will NOT stop it from being pushed
+- To stop tracking an already tracked file:
+
+    - git rm --cached <file-name>
+    - git commit -m "Stop tracking file"
+
+
+--------------------------------------------------------------------------------------------
+
+💡 KEY POINTS TO REMEMBER ⭐
+
+- Git is a **version control system**
+- GitHub is a **remote hosting service**
+- Java, Spring, etc. have NOTHING to do with Git internally
+- Git is **strictly command-driven**, GUI tools are optional
+- `.gitignore` ≠ delete files
+- Git is **always tracking vs not tracking**
+
+
+--------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------
+
 💡 WINDOWS DEVELOPER MODE 🧑‍💻 (OPTIONAL)
 
     Win + R

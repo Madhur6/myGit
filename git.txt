@@ -2,6 +2,24 @@
 
 download git > 64-bit git.exe download > install > click "next" > install > cmd > git --version
 
+**-----------------Generate SSH Key
+
+- cmd > 
+
+- paste the text below, replacing the email used in the example with your GitHub email address.
+	ssh-keygen -t ed25519 -C "your_email@example.com"
+
+- "when you're prompted to 'Enter a file in which to save the key', 
+	you can press Enter to accept the default file location. "
+
+- > Enter passphrase (empty for no passphrase): [Type a passphrase]
+  > Enter same passphrase again: [Type passphrase again]
+  type a secure passphrase for this 😃
+
+
+
+
+	
 **-----------------When we perform our first commit
 
 `
@@ -136,6 +154,21 @@ git commit --amend
 - opens a text editor: (insert- i, quit: esc, :wq)
 
 git push origin main --force
+
+
+
+**---------------------When you used "git add" to add wrong content & now when you commit, It shows all those incorrect content as well along with what you actually want to push"
+**---------------------i have git reset to wrong commit, can i get back my data
+
+git reflog
+1a2b3c4 HEAD@{0}: reset: moving to abc1234
+9e8f7g6 HEAD@{1}: commit: added feature X
+...
+
+git reset --hard <commit-hash>
+
+
+git checkout <commit-hash> -- .  //If You Used --hard and Want Just the Files (Without Resetting HEAD)
 
 
 **---------------------

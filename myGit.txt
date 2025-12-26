@@ -1,0 +1,337 @@
+--------------------- ⭐⭐ ✨ GIT SETUP (WINDOWS 10/11) ✨ ⭐⭐ ---------------------
+
+💡 STEP 1: INSTALL GIT
+
+- Download Git for Windows → Select **64-bit Git.exe**
+- Install → Click "Next" → Finish
+- Open CMD / PowerShell
+- Verify installation:
+
+    git --version
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 STEP 2: GENERATE SSH KEY 🔐 (RECOMMENDED AUTH METHOD)
+
+- Open CMD / PowerShell
+- Generate SSH key (replace with your GitHub email):
+
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+
+- When prompted:
+    > Enter file location → Press **Enter** (default)
+    > Enter passphrase → Optional but recommended
+    > Re-enter passphrase
+
+- Start SSH agent:
+
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519
+
+- Copy public key:
+
+    cat ~/.ssh/id_ed25519.pub
+
+- GitHub → Settings → SSH & GPG Keys → **New SSH Key** → Paste key
+
+⚠️ Important:
+- If you use SSH keys → ALWAYS use SSH repo URLs
+- Do NOT mix HTTPS + SSH
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 STEP 3: FIX "AUTHOR IDENTITY UNKNOWN" ERROR 😫
+
+(Error occurs during first commit)
+
+Fix:
+
+    git config --global user.name "Your Name"
+    git config --global user.email "you@example.com"
+
+Verify:
+
+    git config --list
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 STEP 4: INITIALIZE GIT REPOSITORY FROM LOCAL FOLDER 📂
+
+1) Create an **empty repository** on GitHub (no README)
+
+2) Inside your project folder:
+
+    cd <project-folder>
+    git init
+    git branch -M main
+
+    git remote add origin git@github.com:<username>/<repo>.git
+    git remote -v
+
+    git add .
+    git commit -m "Initial commit"
+    git push -u origin main
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 DELETE A REMOTE BRANCH ❌ (USE WITH CAUTION)
+
+⚠️ Do NOT delete `main` unless another branch is set as default on GitHub
+
+    git push origin --delete <branch-name>
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 CLONING & WORKING WITH A FORK 🚀
+
+- Clone your fork:
+
+    git clone git@github.com:<your-username>/<repo>.git
+    cd <repo>
+
+- Add upstream (original repository):
+
+    git remote add upstream git@github.com:<original-owner>/<repo>.git
+    git remote -v
+
+
+💡 AFTER MAKING CHANGES 👇
+
+    git add .
+    git commit -m "Your commit message"
+
+(Optional but recommended before pushing)
+
+    git fetch upstream
+    git rebase upstream/main
+
+    git push origin main
+
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 FETCHING UPDATES FROM UPSTREAM 🔄
+
+    git fetch upstream
+    git switch main
+    git rebase upstream/main
+    git push origin main
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 WORKING WITH NEW BRANCH FROM UPSTREAM 🌱
+
+    git fetch upstream
+    git switch -c new-branch-name upstream/new-branch-name
+    git push -u origin new-branch-name
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 RESET TO A PREVIOUS COMMIT ⏪
+
+- View commit history:
+
+    git log --oneline
+
+- Hard reset to specific commit:
+
+    git reset --hard <commit-hash>
+
+- Force push (⚠️ rewrites history):
+
+    git push origin <branch-name> --force
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 SWITCH COMPLETELY TO ANOTHER BRANCH 🔁
+
+    git fetch upstream
+    git switch -c development upstream/development
+
+(Optional: overwrite current branch)
+
+    git switch main
+    git reset --hard upstream/development
+    git push origin main --force
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 WHEN YOU ARE "COMMITS AHEAD / BEHIND" (MERGE CONFLICT FIX) ⚠️
+
+Situation:
+- Local branch diverged from upstream
+
+Fix (discard local changes):
+
+    git switch main
+    git reset --hard upstream/main
+    git push origin main --force
+
+⚠️ Never do this on shared branches without team approval
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 KEEP ONLY ONE COMMIT (SQUASH HISTORY) 🧹
+
+    git add .
+    git commit --amend
+
+- Save & exit editor
+- Force push:
+
+    git push origin main --force
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 RECOVER LOST COMMITS (LIFESAVER 🛟)
+
+    git reflog
+
+Restore commit:
+
+    git reset --hard <commit-hash>
+
+Restore files only (without moving HEAD):
+
+    git checkout <commit-hash> -- .
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 CREATE / PUSH A NEW REPOSITORY FROM CLI 🆕
+
+Create new repo locally:
+
+    echo "# ProjectName" >> README.md
+    git init
+    git branch -M main
+    git add README.md
+    git commit -m "Initial commit"
+    git remote add origin git@github.com:<username>/<repo>.git
+    git push -u origin main
+
+Push existing project:
+
+    git remote add origin git@github.com:<username>/<repo>.git
+    git branch -M main
+    git push -u origin main
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 WINDOWS DEVELOPER MODE 🧑‍💻 (OPTIONAL)
+
+    Win + R
+    Type: ms-settings:developers
+    Enable Developer Mode
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 FLUTTER PACKAGE MANAGEMENT 🔄
+
+    flutter pub outdated
+    flutter pub upgrade --major-versions
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 NPM & FIREBASE SETUP (WINDOWS SAFE) 🔥
+
+Update npm:
+
+    npm install -g npm@latest
+
+Install Firebase CLI:
+
+    npm install -g firebase-tools
+
+Verify:
+
+    firebase --version
+
+Login:
+
+    firebase login
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+💡 FLUTTERFIRE SETUP 🔥
+
+Activate CLI:
+
+    dart pub global activate flutterfire_cli
+
+⚠️ If command not found, add to PATH:
+
+    %USERPROFILE%\AppData\Local\Pub\Cache\bin
+
+Verify:
+
+    flutterfire --version
+
+Configure Firebase:
+
+    flutterfire configure
+    → Select app
+    → Select platforms
+    → Finish
+
+
+
+--------------------------------------------------------------------------------------------
+
+📁 LOCAL PATH NOTE:
+    C:\Users\<USERNAME>\AppData\Roaming\sqldeveloper\23.1.1
+
+
+
+
+--------------------- ⭐⭐ ✨           END             ✨ ⭐⭐ ---------------------
